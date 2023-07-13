@@ -1,0 +1,64 @@
+local a1 = Rejoined
+local a2 = starting executing.
+local a3 = trying to kill
+local a4 = Operaton 4 Succesfully Conpleted
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Phynosi Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "phynosihb_mm2"})
+local Tab = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+local Section = Tab:AddSection({
+	Name = "."
+})
+Tab:AddButton({
+	Name = "Rejoin",
+	Callback = function()
+      		local ts = game:GetService("TeleportService")
+
+local p = game:GetService("Players").LocalPlayer
+
+ 
+
+ts:Teleport(game.PlaceId, p)
+print(a1)
+  	end    
+})
+Tab:AddButton({
+	Name = "Coin Farm",
+	Callback = function()
+      	loadstring(game:HttpGet("https://https://raw.githubusercontent.com/Incognito404/scripts/main/MM2CandyFarm",true))()
+      print(a2)
+  	end    
+})
+Tab:AddButton({
+	Name = "Kill All",
+	Callback = function()
+      		game.Workspace.PlayerName.HumanoidRootPart.CFrame = game.Workspace.LocalPlayer.HumanoidRootPart.CFrame
+      print(a3)
+  	end    
+})
+Tab:AddButton({
+	Name = "Gun Grabber",
+	Callback = function()
+      		local path_a = game.Workspace.GunDrop
+      local path_a_1 = game.Workspace.PlayerName
+      path_a.CFrame = path_a_1.HumanoidRootPart.CFrame
+      print(a4)
+  	end    
+})
+Tab:AddButton({
+	Name = "ESP",
+	Callback = function()
+      local l_ldr=func5
+loadstring(game:HttpGet("https://raw.githubusercontent.com/phynosi/mm2/main/phynosifiles/esp.lxecf",true))()		
+  	end    
+})
+
+
+
+
+
+
+
