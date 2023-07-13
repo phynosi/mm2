@@ -1,0 +1,71 @@
+
+local Player = game.Players.LocalPlayer
+
+function HighlightPlayer(Target,BrickColorName)
+ if Target == Player then
+  return nil
+ end
+ local TargetPart
+ 
+ if Target:IsA("Player") then
+  local TargetCharacter = Target.Character or Target.CharacterAdded:Wait()
+  TargetPart = TargetCharacter.PrimaryPart
+ elseif Target:IsA("BasePart") then
+  TargetPart = Target
+ end
+ if not TargetPart then
+  return nil
+ end
+ 
+ local Old = Player:WaitForChild("PlayerGui"):FindFirstChild("ESP:"..Target.Name)
+ 
+ local Billboard = Old or Instance.new("BillboardGui")
+ Billboard.Name = "ESP:"..Target.Name
+ Billboard.Adornee = TargetPart
+ Billboard.Size = UDim2.new(1,0,1,0)
+ Billboard.AlwaysOnTop = true
+ Billboard.Parent = Player:WaitForChild("PlayerGui")
+ 
+ local Frame = Billboard:FindFirstChild("Frame") or Instance.new("Frame")
+ Frame.Size = UDim2.new(1,0,1,0)
+ Frame.BackgroundColor3 = BrickColor.new(BrickColorName).Color
+ Frame.BorderPixelSize = 0
+ Frame.BackgroundTransparency = .5
+ Frame.Parent = Billboard
+end
+
+function PlayerHasTool(Target,ToolName)
+ if Target:WaitForChild("Backpack"):FindFirstChild(ToolName) or (Target.Character and Target.Character:FindFirstChild(ToolName)) then
+  return true
+ else
+  return false
+ end
+end
+
+function CheckTools(Target)
+ if PlayerHasTool(Target,"Gun") then
+  HighlightPlayer(Target,"Bright green")
+ elseif PlayerHasTool(Target,"Knife") then
+  HighlightPlayer(Target,"Bright red")
+ else
+  HighlightPlayer(Target,"Bright yellow")
+ end
+end
+
+game.Workspace.ChildAdded:Connect(function(Part)
+ if Part:IsA("BasePart") and Part.Name == "GunDrop" then
+  HighlightPlayer(Part,"Bright blue")
+ end
+end)
+
+
+function CheckCurrentPlayers()
+ for _,Target in pairs (game.Players:GetPlayers()) do
+  CheckTools(Target)
+ end
+end
+
+while true do
+ CheckCurrentPlayers()
+ wait(.2)
+end
